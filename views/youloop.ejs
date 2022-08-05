@@ -1,0 +1,87 @@
+<%- include("partials/header") -%>
+<div class="intro">
+    <h1>YouLoop</h1>
+    <h3>Put your favorite part of a Youtube video on loop!</h3>
+</div>
+<div class="content">
+    <form class="inputs" action="/" method="post">
+      <div class="labels-inputs">
+        <div class="l-i">
+            <label for="videoURL">Enter video URL</label><br>
+        <input type="text" id="videoURL" name="url" placeholder="Enter video URL">
+        </div>
+        
+        <div class="l-i">
+            <label for="start">Start Time Stamp</label><br>
+            <input type="time" id="start" name = "start" placeholder="Start timestamp">
+        </div>
+      
+        <div class="l-i">
+            <label for="end">End Time Stamp</label><br>
+            <input type="time" name = "end" id="end" placeholder="End timestamp">
+        </div>
+       
+      </div>
+        
+    
+        <button id="urlButton" type="submit">LOOP</button>
+    </form>
+     <div class="vid">
+        <div id="player"></div>
+     </div>
+</div>
+
+
+<script>
+    
+// 2. This code loads the IFrame Player API code asynchronously.
+let tag = document.createElement('script');
+let videoID = "<%= videoID %>";
+let videoURLInput = document.getElementById("videoURL")
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+
+
+var section = {
+  start: "<%=start%>",
+  end: "<%= end %>"
+};
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player(
+    'player',
+    {
+      height: '360',
+      width: '640',
+      videoId: videoID ,
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    }
+  );
+}
+
+function onPlayerReady(event) {
+  player.seekTo(section.start);
+  player.playVideo();
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    var duration = section.end - section.start;
+    setTimeout(restartVideoSection, duration * 1000);
+  }
+}
+
+function restartVideoSection() {
+  player.seekTo(section.start);
+}
+</script>
+<%- include("partials/footer") -%>
