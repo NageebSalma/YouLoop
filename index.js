@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 
 // index page
 app.get("/", function(req, res) {
-  res.render('youloop',{videoID:"H5v3kku4y6Q" , start : 0 , end : 60});
+  res.render('youloop',{videoID:"H5v3kku4y6Q" , start : 124 , end : 200});
 });
 app.post("/",function(req,res){
    
@@ -27,7 +27,7 @@ if (match && match[2].length == 11) {
     let startMins = +req.body.start.split(":")[0]
     let startSeconds = +req.body.start.split(":")[1]
     let endMins = +req.body.end.split(":")[0]
-    let endSeconds = +req.body.start.split(":")[1]
+    let endSeconds = +req.body.end.split(":")[1]
     let start = startMins*60+startSeconds;
     // console.log(start)
     let end = endMins*60+endSeconds;
