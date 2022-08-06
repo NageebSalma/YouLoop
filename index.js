@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 
 // index page
 app.get("/", function(req, res) {
-  res.render('youloop',{videoID:"H5v3kku4y6Q" , start : 124 , end : 200});
+  res.render('youloop',{videoID:"H5v3kku4y6Q" , start : 124 , end : 150});
 });
 app.post("/",function(req,res){
    
