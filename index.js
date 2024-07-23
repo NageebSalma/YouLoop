@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 
 // index page
 app.get("/", function(req, res) {
-  res.render('youloop',{videoID:"H5v3kku4y6Q" , start : 124 , end : 150});
+  res.render('youloop.ejs',{videoID:"H5v3kku4y6Q" , start : 124 , end : 150});
 });
 app.post("/",function(req,res){
    
@@ -33,7 +33,7 @@ if (match && match[2].length == 11) {
     let start = startMins*60+startSeconds;
     // console.log(start)
     let end = endMins*60+endSeconds;
-    res.render('youloop',{videoID: videoID , start : start , end : end});
+    res.render('youloop.ejs',{videoID: videoID , start : start , end : end});
 
 })
 
